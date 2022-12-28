@@ -38,15 +38,13 @@ class SinglyLinkedList {
     if (!this.head) {
       this.head = newNode;
     } else {
-      let curr = this.head;
-      while (curr) {
-        if (!curr.next) {
-          curr.next = newNode;
-          break;
-        }
-        curr = current.next;
+      let current = this.head;
+      for (let i = 0; i < this.length; i++) {
+        current = current.next;
       }
+      current.next = newNode;
     }
+
     this.length++;
     return this;
     //console.log(`${this}`);
@@ -102,7 +100,7 @@ class SinglyLinkedList {
     if (this.head) {
       if (this.head.next) {
         let current = this.head;
-        while (current) {
+        for (let i = 0; i < this.length; i++) {
           process.stdout.write(`${current.value} -> `);
           current = current.next;
         }
@@ -115,8 +113,8 @@ class SinglyLinkedList {
 }
 
 /* let linkedList = new SinglyLinkedList();
-linkedList.addToHead("B");
-linkedList.addToHead("A"); */
+  linkedList.addToHead("B");
+  linkedList.addToHead("A"); */
 
 module.exports = {
   SinglyLinkedList,
