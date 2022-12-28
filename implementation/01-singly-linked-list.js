@@ -70,7 +70,7 @@ class SinglyLinkedList {
         this.head = null;
       } else {
         let penultimate = this.head;
-        for (let i = 1; i < this.length; i++) {
+        for (let i = 1; i < this.length - 1; i++) {
           penultimate = penultimate.next;
         }
         tail = penultimate.next;
@@ -90,11 +90,10 @@ class SinglyLinkedList {
   print() {
     if (this.length > 0) {
       let current = this.head;
-      for (let i = 1; i < this.length; i++) {
-        process.stdout.write(`${current.value} -> `);
+      while (current) {
+        console.log(current.value);
         current = current.next;
       }
-    } else {
       console.log("NULL");
     }
     // Write your hypothesis on the time complexity of this method here
