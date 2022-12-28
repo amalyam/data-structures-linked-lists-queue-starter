@@ -9,7 +9,6 @@ class SinglyLinkedNode {
 class SinglyLinkedList {
   constructor() {
     this.head = null;
-    this.tail = this.head;
     this.length = 0;
   }
 
@@ -39,7 +38,7 @@ class SinglyLinkedList {
       this.head = newNode;
     } else {
       let current = this.head;
-      for (let i = 0; i < this.length; i++) {
+      for (let i = 1; i < this.length; i++) {
         current = current.next;
       }
       current.next = newNode;
@@ -52,61 +51,51 @@ class SinglyLinkedList {
   }
 
   removeFromHead() {
-    let removedHead;
     if (this.head) {
-      let headNode = this.head.next;
-      removedHead = this.head;
-      removedHead.next = null;
-      this.head = headNode;
+      let removedHead = this.head;
+      this.head = this.head.next;
       this.length--;
+
+      return removedHead;
     }
-    return removedHead;
 
     // Write your hypothesis on the time complexity of this method here
   }
 
   removeFromTail() {
+    let tail;
     if (this.head) {
-      let removedNode = null;
-      if (!this.head.next) {
-        removedNode = this.head;
+      if (this.length === 1) {
+        tail = this.head;
         this.head = null;
       } else {
-        let current = this.head;
-        while (current) {
-          if (!current.next.next) {
-            removedNode = current.next;
-            current.next = null;
-            this.length--;
-            return removedNode;
-          }
-          current = current.next;
+        let penultimate = this.head;
+        for (let i = 1; i < this.length; i++) {
+          penultimate = penultimate.next;
         }
+        tail = penultimate.next;
+        penultimate.next = null;
       }
-      return removedNode;
+      this.length--;
+      return tail;
     }
     // Write your hypothesis on the time complexity of this method here
   }
 
   peekAtHead() {
-    if (!this.head) {
-      return undefined;
-    }
-    return this.head.value;
+    if (this.head) return this.head.value;
     // Write your hypothesis on the time complexity of this method here
   }
 
   print() {
-    if (this.head) {
-      if (this.head.next) {
-        let current = this.head;
-        for (let i = 0; i < this.length; i++) {
-          process.stdout.write(`${current.value} -> `);
-          current = current.next;
-        }
-      } else {
-        console.log(`${this.head}`);
+    if (this.length > 0) {
+      let current = this.head;
+      for (let i = 1; i < this.length; i++) {
+        process.stdout.write(`${current.value} -> `);
+        current = current.next;
       }
+    } else {
+      console.log("NULL");
     }
     // Write your hypothesis on the time complexity of this method here
   }
