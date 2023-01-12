@@ -1,13 +1,14 @@
-const { SinglyLinkedNode,
-        SinglyLinkedList,
-        DoublyLinkedNode,
-        DoublyLinkedList } = require('../linked-list-queue-practice.js');
-const { expect } = require('chai');
+const {
+  SinglyLinkedNode,
+  SinglyLinkedList,
+  DoublyLinkedNode,
+  DoublyLinkedList,
+} = require("../linked-list-queue-practice.js");
+const { expect } = require("chai");
 
-const chai = require('chai');
+const chai = require("chai");
 
-
-describe('Part 2: Linked Lists', () => {
+describe("Part 2: Linked Lists", () => {
   let node;
   let list;
 
@@ -15,8 +16,7 @@ describe('Part 2: Linked Lists', () => {
     list = new SinglyLinkedList();
   });
 
-  it('`listLength` returns the length of the linked list', () => {
-
+  it("`listLength` returns the length of the linked list", () => {
     list.addToTail(1);
     list.addToTail(2);
     list.addToTail(3);
@@ -25,9 +25,7 @@ describe('Part 2: Linked Lists', () => {
     expect(list.listLength()).to.equal(4);
   });
 
-
-  it('`sumOfNodes` returns the sum total of all nodes', () => {
-
+  it("`sumOfNodes` returns the sum total of all nodes", () => {
     list.addToTail(1);
     list.addToTail(4);
     list.addToTail(5);
@@ -36,9 +34,7 @@ describe('Part 2: Linked Lists', () => {
     expect(list.sumOfNodes()).to.equal(18);
   });
 
-
-  it('`averageValue` returns the average of all node values', () => {
-
+  it("`averageValue` returns the average of all node values", () => {
     list.addToTail(12);
     list.addToTail(6);
     list.addToTail(5);
@@ -47,9 +43,7 @@ describe('Part 2: Linked Lists', () => {
     expect(list.averageValue()).to.equal(9);
   });
 
-
-  it('`findNthNode` finds a node in the linked list', () => {
-
+  it("`findNthNode` finds a node in the linked list", () => {
     list.addToTail(13);
     list.addToTail(21);
     list.addToTail(32);
@@ -59,8 +53,7 @@ describe('Part 2: Linked Lists', () => {
     expect(list.findNthNode(3).value).to.equal(14);
   });
 
-  it('`findMid` returns the middle node (rounded down)', () => {
-
+  it("`findMid` returns the middle node (rounded down)", () => {
     list.addToTail(1);
     list.addToTail(2);
     list.addToTail(3);
@@ -74,9 +67,7 @@ describe('Part 2: Linked Lists', () => {
     expect(list.findMid().value).to.equal(3);
   });
 
-
-  it('`reverse` returns a new reversed linked list', () => {
-
+  it("`reverse` returns a new reversed linked list", () => {
     list.addToTail(1);
     list.addToTail(2);
     list.addToTail(3);
@@ -87,7 +78,7 @@ describe('Part 2: Linked Lists', () => {
     const reversed = list.reverse();
 
     let cur = reversed.head;
-    for (let i = 6 ; i >= 1 ; i--) {
+    for (let i = 6; i >= 1; i--) {
       expect(cur.value).to.equal(i);
       cur = cur.next;
     }
@@ -95,8 +86,7 @@ describe('Part 2: Linked Lists', () => {
     expect(cur).to.equal(null);
   });
 
-  it('`reverseInPlace` reverses the linked list in-place', () => {
-
+  it("`reverseInPlace` reverses the linked list in-place", () => {
     list.addToTail(1);
     list.addToTail(2);
     list.addToTail(3);
@@ -107,18 +97,16 @@ describe('Part 2: Linked Lists', () => {
     list.reverseInPlace();
 
     let cur = list.head;
-    for (let i = 6 ; i >= 1 ; i--) {
+    for (let i = 6; i >= 1; i--) {
       expect(cur.value).to.equal(i);
       cur = cur.next;
     }
 
     expect(cur).to.equal(null);
   });
-
 });
 
-
-describe('Part 3: Doubly Linked Lists', () => {
+describe("Part 3: Doubly Linked Lists", () => {
   let node;
   let list;
 
@@ -126,8 +114,7 @@ describe('Part 3: Doubly Linked Lists', () => {
     dll = new DoublyLinkedList();
   });
 
-  it('`findMid` returns the middle node (rounded down)', () => {
-
+  it("`findMid` returns the middle node (rounded down)", () => {
     dll.addToTail(1);
     dll.addToTail(2);
     dll.addToTail(3);
@@ -141,9 +128,7 @@ describe('Part 3: Doubly Linked Lists', () => {
     expect(dll.findMid().value).to.equal(3);
   });
 
-
-  it('`reverse` returns a new reversed linked list', () => {
-
+  it("`reverse` returns a new reversed linked list", () => {
     dll.addToTail(1);
     dll.addToTail(2);
     dll.addToTail(3);
@@ -154,7 +139,7 @@ describe('Part 3: Doubly Linked Lists', () => {
     const reversed = dll.reverse();
 
     let cur = reversed.head;
-    for (let i = 6 ; i >= 1 ; i--) {
+    for (let i = 6; i >= 1; i--) {
       expect(cur.value).to.equal(i);
       cur = cur.next;
     }
@@ -162,8 +147,21 @@ describe('Part 3: Doubly Linked Lists', () => {
     expect(cur).to.equal(null);
   });
 
-  it('`reverseInPlace` reverses the linked list in-place', () => {
+  it("`reverseInPlace` moves the head to the last place in the list", () => {
+    dll.addToTail(1);
+    dll.addToTail(2);
+    dll.addToTail(3);
+    dll.addToTail(4);
+    dll.addToTail(5);
+    dll.addToTail(6);
 
+    dll.reverseInPlace();
+
+    expect(this.head).to.equal(2);
+    expect(this.tail).to.equal(1);
+  });
+
+  it("`reverseInPlace` reverses the linked list in-place", () => {
     dll.addToTail(1);
     dll.addToTail(2);
     dll.addToTail(3);
@@ -174,13 +172,11 @@ describe('Part 3: Doubly Linked Lists', () => {
     dll.reverseInPlace();
 
     let cur = dll.head;
-    for (let i = 6 ; i >= 1 ; i--) {
+    for (let i = 6; i >= 1; i--) {
       expect(cur.value).to.equal(i);
       cur = cur.next;
     }
 
     expect(cur).to.equal(null);
   });
-
-
 });
