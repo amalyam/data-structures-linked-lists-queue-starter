@@ -116,10 +116,19 @@ class SinglyLinkedList {
     // Write your hypothesis on the time complexity of this method here
     let reversedList = new SinglyLinkedList();
 
-    for (let i = this.listLength() - 1; i >= 0; i--) {
+    let current = this.head;
+    while (current) {
+      let newNode = new SinglyLinkedNode(current.value);
+      newNode.next = reversedList.head;
+      reversedList.head = newNode;
+      current = current.next;
+    }
+
+    /*    inefficient:
+      for (let i = this.listLength() - 1; i >= 0; i--) {
       let lastItem = this.findNthNode(i);
       reversedList.addToTail(lastItem.value);
-    }
+    } */
 
     return reversedList;
   }
@@ -127,6 +136,8 @@ class SinglyLinkedList {
   reverseInPlace() {
     // Reverses the linked list in-place
     // Write your hypothesis on the time complexity of this method here
+
+    //improve pointers?
 
     let prev = null;
     let middle = this.head;
@@ -140,58 +151,8 @@ class SinglyLinkedList {
     }
 
     this.head = prev;
-
-    /*     let prev = this.head;
-    let middle = prev.next;
-    let end = middle.next;
-    middle.next = prev;
-    prev.next = null;
-    prev = middle;
-
-    while (this.head !== middle) {
-      middle = end.next;
-      end.next = prev;
-      if (!middle.next) {
-        middle.next = end;
-        this.head = middle;
-      } else {
-        prev = middle.next;
-        middle.next = end;
-        end = prev.next;
-        prev.next = middle;
-      }
-    } */
   }
 }
-
-function swapThree(pointers) {
-  pointers.middle.next = pointers.prev;
-  pointers.prev = pointers.end.next;
-  pointers.end.next = pointers.middle;
-}
-
-let list = new SinglyLinkedList();
-
-list.addToTail(1);
-list.addToTail(2);
-list.addToTail(3);
-list.addToTail(4);
-list.addToTail(5);
-list.addToTail(6);
-list.addToTail(7);
-/* list.addToTail(8);
-list.addToTail(9);
-list.addToTail(10);
-list.addToTail(11);
-list.addToTail(12);
-list.addToTail(13);
-list.addToTail(14); */
-
-list.reverseInPlace();
-
-debugger;
-
-//list.reverse();
 
 class DoublyLinkedNode {
   constructor(val) {
@@ -250,13 +211,66 @@ class DoublyLinkedList {
   reverse() {
     // Returns a new reversed version of the linked list
     // Write your hypothesis on the time complexity of this method here
+    let reversedList = new DoublyLinkedList();
+
+    let current = this.head.next;
+    let newNode = new DoublyLinkedNode(this.head.value);
+    reversedList.head = newNode;
+    reversedList.tail = reversedList.head;
+
+    while (current) {
+      let newNode = new DoublyLinkedNode(current.value);
+      newNode.next = reversedList.head;
+      reversedList.head.prev = newNode;
+      reversedList.head = newNode;
+
+      current = current.next;
+    }
+
+    return reversedList;
   }
 
   reverseInPlace() {
     // Reverses the linked list in-place
     // Write your hypothesis on the time complexity of this method here
+    //O(n)
+    let current = this.head;
+
+    while (current) {
+      let nextNode = current.next;
+      current.next = current.prev;
+      current.prev = nextNode;
+      current = current.prev;
+    }
+
+    current = this.head;
+    this.head = this.tail;
+    this.tail = current;
   }
 }
+
+let dll = new DoublyLinkedList();
+
+dll.addToTail(1);
+dll.addToTail(2);
+dll.addToTail(3);
+dll.addToTail(4);
+dll.addToTail(5);
+dll.addToTail(6);
+/*
+list.addToTail(7);
+list.addToTail(8);
+list.addToTail(9);
+list.addToTail(10);
+list.addToTail(11);
+list.addToTail(12);
+list.addToTail(13);
+list.addToTail(14);
+
+dll.reverseInPlace();
+*/
+
+dll.reverseInPlace();
 
 module.exports = {
   SinglyLinkedNode,

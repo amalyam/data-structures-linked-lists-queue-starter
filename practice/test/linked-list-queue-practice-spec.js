@@ -147,20 +147,6 @@ describe("Part 3: Doubly Linked Lists", () => {
     expect(cur).to.equal(null);
   });
 
-  it("`reverseInPlace` moves the head to the last place in the list", () => {
-    dll.addToTail(1);
-    dll.addToTail(2);
-    dll.addToTail(3);
-    dll.addToTail(4);
-    dll.addToTail(5);
-    dll.addToTail(6);
-
-    dll.reverseInPlace();
-
-    expect(this.head).to.equal(2);
-    expect(this.tail).to.equal(1);
-  });
-
   it("`reverseInPlace` reverses the linked list in-place", () => {
     dll.addToTail(1);
     dll.addToTail(2);
